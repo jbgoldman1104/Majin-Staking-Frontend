@@ -7,17 +7,17 @@ import Routes from "./Routes";
 import { Spinner } from "@material-tailwind/react";
 
 import { EventBus, minAddress } from "./utils/methods";
-import { BTN_HEIGHT_IN_MAIN_AREA, BTN_WIDTH_IN_MAIN_AREA, SET_LOADING } from "./utils/constants";
+import { BTN_HEIGHT_IN_MAIN_AREA, BTN_WIDTH_IN_MAIN_AREA, SET_LOADING, SOCIAL_TELEGRAM, SOCIAL_TWITTER } from "./utils/constants";
 import { useEffect, useState } from "react";
 import PrimaryButton from "./components/buttons/PrimaryButton";
 import Stake from "./pages/Stake";
+import SocialIcon from "./components/SocialIcon";
+import WalletConnectButton from "./components/buttons/WalletConnectButton";
 
 function App() {
-  const pages = useRoutes(Routes);
   const [isLoading, setIsLoading] = useState(false);
   const showWalletMenu = false;
-  const [roundId, setRoundId] = useState(1);
-
+  
   const setLoading = (data) => {
     setIsLoading(data);
   };
@@ -32,38 +32,28 @@ function App() {
     };
   }, []);
 
-  const onUpdateRound = (roundId) => {
-    setRoundId(roundId);
-  }
 
   return (
 
     <div
-      className="App flex flex-col bg-[#f6f6f8] min-h-[100vh] overflow-x-hidden text-eloblack items-center"
+      className="App flex flex-col bg-black min-h-[100vh] overflow-x-hidden text-eloblack items-center"
     >
-      <div className="flex w-[100vw] lg:w-[1000px] justify-between h-max px-6 md:px-10 py-5 md:py-8 items-start ">
+      <div className="flex w-[100vw] lg:w-[1200px] justify-between h-max px-6 md:px-10 py-5 md:py-8 items-start ">
         <div className="w-full relative">
           <header className="flex flex-row justify-between items-center w-full">
             <div className="flex">
               <img src="/logo.png" className="w-[88px] h-[100px]" alt=""/>
-              <span className=" text-xl md:text-2xl font-black text-left">MAJIN<br/>STAKING</span>
+              <span className="text-highlight font-black text-left text-[36px] ml-2">MAJIN<br/>STAKING</span>
             </div>
-            <NavbarWithCTAButton className="flex" />
+            <div className="flex flex-row items-center ">
+              <SocialIcon social={SOCIAL_TWITTER}/>
+              <SocialIcon className="ml-[22px]" social={SOCIAL_TELEGRAM}/>
+              <WalletConnectButton className="ml-[22px]" label="CONNECT WALLET"/>
+            </div>
           </header>
-          
-          {
-            showWalletMenu &&
-            <div className="absolute top-50 left-0 w-full flex flex-col gap-6 rounded-3xl  items-center"
-            >
-              
-            </div>
-          }
-          {
-            showWalletMenu !== true &&
-            <div className="w-full mt-5">
-              <Stake onUpdateRound={onUpdateRound}/>
-            </div>
-          }
+          <div className="w-full py-[80px]">
+            <Stake />
+          </div>
         </div>
       </div>
 

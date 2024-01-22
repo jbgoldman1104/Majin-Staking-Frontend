@@ -8,7 +8,7 @@ import Status from "../components/Status";
 import Loading from "../components/Loading";
 
 
-export default function Presale({ className, onUpdateRound }) {
+export default function Stake({ className }) {
   const [depositeAmount, setDepositeAmount] = useState("");
   const [claimInfo, setClaimInfo] = useState({
       deposited: 0,  claim: 0, enable: false
@@ -88,35 +88,30 @@ export default function Presale({ className, onUpdateRound }) {
     <div className={`${className} flex flex-col  `}>
       <div className="w-full flex flex-row justify-center">
         <div
-          className="overflow-hidden w-full md:w-[520px] flex flex-col justify-between "
+          className="overflow-hidden w-full md:w-[850px] flex flex-col justify-between "
         >
           <Reveal keyframes={fadeInUp} className='onStep' delay={0} duration={800} triggerOnce>
-            <div className="flex flex-col gap-3"> 
-              <div className="flex">
-                <span className="text-2xl font-bold text-left">Count down</span>
-              </div>
-              { roundId <= 2 &&
-              <div className="bg-white rounded-xl border-none flex flex-col gap-3 items-center justify-center px-4 py-5">
-                <div className="flex gap-3 items-center justify-center">
-                  <div className="border-[1px] rounded-xl border-eloline w-[60px] py-2 flex flex-col">
-                    <span className="text-2xl font-black">{getTimeUnit('d')}</span>
-                    <span className="text-xs text-elogray">Days</span>
-                  </div>
-                  <div className="border-[1px] rounded-xl border-eloline w-[60px] py-2 flex flex-col">
-                    <span className="text-2xl font-black">{getTimeUnit('h')}</span>
-                    <span className="text-xs text-elogray">Hours</span>
-                  </div>
-                  <div className="border-[1px] rounded-xl border-eloline w-[60px] py-2 flex flex-col">
-                    <span className="text-2xl font-black">{getTimeUnit('m')}</span>
-                    <span className="text-xs text-elogray">Mins</span>
-                  </div>
-                  <div className="border-[1px] rounded-xl border-eloline w-[60px] py-2 flex flex-col">
-                    <span className="text-2xl font-black">{getTimeUnit('s')}</span>
-                    <span className="text-xs text-elogray">Secs</span>
-                  </div>
+            <div className="flex flex-col"> 
+              <div className="rounded-[20px] border-2 border-highlight flex flex-col items-center justify-center px-[45px] py-[70px]">
+                <span className="text-highlight font-[700] text-[32px]">MAJIN STAKING</span>
+                <div className="flex flex-row justify-between items-center w-full mt-[50px]">
+                  <span className="text-primary font-[500] text-[24px]">TOTAL VALUE LOCKED (TVL)</span>
+                  <span className="text-primary font-[500] text-[24px]">$ 3,300.0</span>
+                </div>
+                <div className="flex flex-row justify-between items-center w-full mt-[24px]">
+                  <span className="text-primary font-[500] text-[24px]">STAKED</span>
+                  <span className="text-primary font-[500] text-[24px]">150000 MAJIN</span>
+                </div>
+                <div className="flex flex-row justify-between items-center w-full mt-[24px]">
+                  <span className="text-primary font-[500] text-[24px]">AVAILABLE</span>
+                  <span className="text-primary font-[500] text-[24px]">150000 MAJIN</span>
+                </div>
+                <div className="w-4/6 rounded-[20px] border-2 border-highlight flex items-center justify-center px-[20px] py-[18px]">
+
                 </div>
               </div>
-              }
+
+
 
               { roundId < 3 && 
                 <div className="bg-white rounded-xl border-none flex flex-col gap-4 py-5 px-4">
