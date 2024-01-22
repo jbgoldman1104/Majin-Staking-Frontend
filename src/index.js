@@ -5,7 +5,7 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import { ThemeProvider } from "@material-tailwind/react";
-
+import { SeiWalletProvider } from '@sei-js/react';
 import { Provider } from "react-redux";
 
 import { ToastContainer } from 'react-toastify';
@@ -16,13 +16,21 @@ window.Buffer = window.Buffer || require("buffer").Buffer;
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  
+  <SeiWalletProvider
+	    chainConfiguration={{
+        chainId: 'atlantic-2',
+        restUrl: 'https://rest.atlantic-2.seinetwork.io',
+        rpcUrl: 'https://rpc.atlantic-2.seinetwork.io'
+	    }}
+	    wallets={['compass', 'fin', 'keplr', 'leap']}>
     <BrowserRouter>
       <ThemeProvider>
           <App />
           <ToastContainer />
       </ThemeProvider>
     </BrowserRouter>
+
+  </SeiWalletProvider>
   
 );
 

@@ -17,7 +17,7 @@ export const EventBus = {
 };
 
 export const minAddress = (strAddress) => {
-  return strAddress?.toString()?.substring(0, 6) + "..." + strAddress?.toString()?.substring(38, 42);
+  return strAddress?.toString()?.substring(0, 6) + "..." + strAddress?.toString()?.substring(strAddress.length - 6, strAddress.length);
 }
 
 export const formatNumber = (number) => {

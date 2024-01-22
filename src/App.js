@@ -48,7 +48,7 @@ function App() {
             <div className="flex flex-row items-center ">
               <SocialIcon social={SOCIAL_TWITTER}/>
               <SocialIcon className="ml-[22px]" social={SOCIAL_TELEGRAM}/>
-              <WalletConnectButton className="ml-[22px]" label="CONNECT WALLET"/>
+              <WalletConnectButton className="ml-[22px]" />
             </div>
           </header>
           <div className="w-full py-[80px]">

@@ -62,7 +62,7 @@ export default function Stake({ className }) {
                   </div>
 
                   <PrimaryButton
-                    className="font-[700] mt-[24px]"
+                    className="font-[700] text-[24px] mt-[24px]"
                     label="STAKE & EARN MAJIN"
                     onClick={() => {
                       
