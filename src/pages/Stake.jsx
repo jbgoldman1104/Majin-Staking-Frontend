@@ -71,6 +71,7 @@ export default function Stake({ className }) {
     if ( result ) {
       toast(`${amount} Majin staked`);
       fetch();
+      setDepositeAmount("");
     } else {
       toast(`Failed to stake Majin`);
     }
@@ -126,7 +127,7 @@ export default function Stake({ className }) {
                 <span className="text-highlight font-[700] text-[32px]">MAJIN STAKING</span>
                 <div className="flex flex-row justify-between items-center w-full mt-[50px]">
                   <span className="text-primary font-[500] text-[24px]">TOTAL VALUE LOCKED (TVL)</span>
-                  <span className="text-primary font-[500] text-[24px]">$ {commafy(totalStaked * 0.02 )}</span>
+                  <span className="text-primary font-[500] text-[24px]">$ {commafy(totalStaked * 0.0019 )}</span>
                 </div>
                 <div className="flex flex-row justify-between items-center w-full mt-[24px]">
                   <span className="text-primary font-[500] text-[24px]">STAKED</span>
