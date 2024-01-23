@@ -8,7 +8,7 @@ import {
 } from "@material-tailwind/react";
 import { AiOutlineClose } from "react-icons/ai";
 import { useEffect, useState } from "react";
-import { toast } from "react-toastify";
+
 
 export default function NavbarWithCTAButton({ className }) {
 

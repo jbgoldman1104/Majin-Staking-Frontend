@@ -2,22 +2,50 @@ import PrimaryButton from "../components/buttons/PrimaryButton";
 import { useEffect, useRef, useState } from "react";
 import { Reveal } from 'react-awesome-reveal';
 import { fadeInUp } from "../utils/constants";
+import useClient from "../utils/client";
+import { useWallet } from "@sei-js/react";
+import { toast } from "react-toastify";
 
 
 export default function Stake({ className }) {
   const [depositeAmount, setDepositeAmount] = useState("");
-  
+  const [totalStaked, setTotalStaked] = useState(0);
+  const [meStaked, setMeStaked] = useState(0);
+  const [tokenBalance, setTokenBalance] = useState(0);
+  const [reward, setReward] = useState(0);
+  const [dailyReturn, setDailyReturn] = useState(0);
+  const {queryContractConfig, queryTokenBalance, queryStakerInfo, stakeMajin, unstakeMajin, claimReward} = useClient();
+  const {connectedWallet} = useWallet();
 
-  const formatNumber = (v) => {
-    return v < 10 ? "0" + v : v;
-  }
+  const fetch = async () => {
+    const config = await queryContractConfig();
+    if (config) {
+      setDailyReturn(config.daily_return);
+      setTotalStaked(Number(config.total_staked) / 10 ** 6)
+    }
+    const stakerInfo = await queryStakerInfo();
+    if ( stakerInfo ) {
+      setMeStaked(Number(stakerInfo.amount) / 10 ** 6)
+      setReward(Number(stakerInfo.reward) / 10 ** 6)
+    }
+
+    const balance = await queryTokenBalance();
+    if ( balance ) {
+      setTokenBalance(Number(balance) / 10 ** 6);
+    } 
+}
+
+  useEffect(() => {
+    fetch();
+  }, [connectedWallet, queryTokenBalance, queryContractConfig, queryStakerInfo]);
 
   const formatBlanace = (v, digits = 4) => {
     return Math.floor(v * (10 ** digits) + 1e-2) / (10 ** digits);
   }
 
   function commafy( num ) {
-    var str = num.toString().split('.');
+    const fmtNum = formatBlanace(num);
+    const str = fmtNum.toString().split('.');
     if (str[0].length >= 5) {
         str[0] = str[0].replace(/(\d)(?=(\d{3})+$)/g, '$1,');
     }
@@ -25,6 +53,65 @@ export default function Stake({ className }) {
         str[1] = str[1].replace(/(\d{3})/g, '$1 ');
     }
     return str.join('.');
+  }
+
+  const onStake = async () => {
+    const amount = Number(depositeAmount);
+    if ( amount <= 0 || amount > tokenBalance ) {
+      toast("Invalid amount");
+      return;
+    }
+    let result = false;
+    try {
+     result = await stakeMajin(amount);
+    } catch (e) {
+      console.log(e);
+    }
+
+    if ( result ) {
+      toast(`${amount} Majin staked`);
+      fetch();
+    } else {
+      toast(`Failed to stake Majin`);
+    }
+  }
+
+  const onUnstake = async() => {
+    if ( !connectedWallet || !meStaked ) {
+      return;
+    }
+    let result = false;
+    try {
+     result = await unstakeMajin();
+    } catch (e) {
+      console.log(e);
+    }
+
+    if ( result ) {
+      toast(`${meStaked} Majin unstaked`);
+      fetch();
+    } else {
+      toast(`Failed to unstake Majin`);
+    }
+  }
+
+  const onClaimRewards = async() => {
+    if ( !connectedWallet || !reward ) {
+      return;
+    }
+    let result = false;
+    try {
+     result = await claimReward();
+    } catch (e) {
+      console.log(e);
+    }
+
+    if ( result ) {
+      toast(`${reward} Majin claimed`);
+      fetch();
+    } else {
+      toast(`Failed to claim reward`);
+    }
   }
 
   return (
@@ -39,15 +126,15 @@ export default function Stake({ className }) {
                 <span className="text-highlight font-[700] text-[32px]">MAJIN STAKING</span>
                 <div className="flex flex-row justify-between items-center w-full mt-[50px]">
                   <span className="text-primary font-[500] text-[24px]">TOTAL VALUE LOCKED (TVL)</span>
-                  <span className="text-primary font-[500] text-[24px]">$ 3,300.0</span>
+                  <span className="text-primary font-[500] text-[24px]">$ {commafy(totalStaked * 0.02 )}</span>
                 </div>
                 <div className="flex flex-row justify-between items-center w-full mt-[24px]">
                   <span className="text-primary font-[500] text-[24px]">STAKED</span>
-                  <span className="text-primary font-[500] text-[24px]">150000 MAJIN</span>
+                  <span className="text-primary font-[500] text-[24px]">{commafy(meStaked)} MAJIN</span>
                 </div>
                 <div className="flex flex-row justify-between items-center w-full mt-[24px]">
                   <span className="text-primary font-[500] text-[24px]">AVAILABLE</span>
-                  <span className="text-primary font-[500] text-[24px]">150000 MAJIN</span>
+                  <span className="text-primary font-[500] text-[24px]">{commafy(tokenBalance)} MAJIN</span>
                 </div>
                 <div className="w-4/6 flex flex-col">
                   <div className="w-full rounded-[20px] border-2 border-highlight flex items-center justify-end px-[20px] py-[18px] mt-[40px]">
@@ -65,13 +152,13 @@ export default function Stake({ className }) {
                     className="font-[700] text-[24px] mt-[24px]"
                     label="STAKE & EARN MAJIN"
                     onClick={() => {
-                      
+                      onStake();
                     }}
                   />
 
                   <div className="flex flex-row justify-between items-center w-full mt-[32px]">
                     <span className="text-primary font-[400] text-[16px]">YOUR REWARDS</span>
-                    <span className="text-primary font-[400] text-[16px]">150000 MAJIN</span>
+                    <span className="text-primary font-[400] text-[16px]">{commafy(reward)} MAJIN</span>
                   </div>
 
                   <div className="flex flex-row justify-between items-center w-full mt-[32px]">
@@ -79,14 +166,14 @@ export default function Stake({ className }) {
                       className="w-[45%] text-[16px] py-[8px]"
                       label="UNSTAKE"
                       onClick={() => {
-                        
+                        onUnstake();
                       }}
                     />
                     <PrimaryButton
                       className="w-[45%] text-[16px] py-[8px]"
                       label="CLAIM REWARDS"
                       onClick={() => {
-                        
+                        onClaimRewards();
                       }}
                     />
                   </div>
@@ -102,12 +189,12 @@ export default function Stake({ className }) {
                   
                   <div className="flex flex-row justify-between items-center w-full mt-[32px]">
                     <span className="text-primary font-[400] text-[24px]">DAILY RETURN</span>
-                    <span className="text-primary font-[400] text-[24px]">5%</span>
+                    <span className="text-primary font-[400] text-[24px]">{commafy(dailyReturn)}%</span>
                   </div>
 
                   <div className="flex flex-row justify-between items-center w-full mt-[32px]">
                     <span className="text-primary font-[400] text-[24px]">APR</span>
-                    <span className="text-primary font-[400] text-[24px]">2225%</span>
+                    <span className="text-primary font-[400] text-[24px]">{commafy(dailyReturn*365)}%</span>
                   </div>
 
                   <div className="flex flex-row justify-between items-center w-full mt-[32px]">

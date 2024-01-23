@@ -18,9 +18,9 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <SeiWalletProvider
 	    chainConfiguration={{
-        chainId: 'atlantic-2',
-        restUrl: 'https://rest.atlantic-2.seinetwork.io',
-        rpcUrl: 'https://rpc.atlantic-2.seinetwork.io'
+        chainId: process.env.REACT_APP_CHAIN_ID,
+        restUrl: process.env.REACT_APP_REST_URL,
+        rpcUrl: process.env.REACT_APP_RPC_URL
 	    }}
 	    wallets={['compass', 'fin', 'keplr', 'leap']}>
     <BrowserRouter>
