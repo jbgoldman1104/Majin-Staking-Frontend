@@ -23,8 +23,8 @@ const WalletConnectButton = ({ className}) => {
 
   return (
       <button
-        className={`${className} text-primary bg-[#1B0B37] hover:bg-[#2B1B47] border-4 border-highlight 
-            px-4 h-[66px] text-[24px] font-semibold  rounded-[20px] flex items-center justify-center`}
+        className={`${className} text-primary bg-[#1B0B37] hover:bg-[#2B1B47] border-2 border-highlight 
+            px-2 h-[48px] text-[18px] font-semibold  rounded-[12px] flex items-center justify-center`}
         onClick={onClick}
       >
         <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">

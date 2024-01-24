@@ -119,59 +119,59 @@ export default function Stake({ className }) {
     <div className={`${className} flex flex-col  `}>
       <div className="w-full flex flex-row justify-center">
         <div
-          className="overflow-hidden w-full md:w-[850px] flex flex-col justify-between "
+          className="overflow-hidden w-full md:w-[640px] flex flex-col justify-between "
         >
           <Reveal keyframes={fadeInUp} className='onStep' delay={0} duration={800} triggerOnce>
             <div className="flex flex-col"> 
-              <div className="rounded-[20px] border-2 border-highlight flex flex-col items-center justify-center px-[45px] py-[70px]">
-                <span className="text-highlight font-[700] text-[32px]">MAJIN STAKING</span>
-                <div className="flex flex-row justify-between items-center w-full mt-[50px]">
-                  <span className="text-primary font-[500] text-[24px]">TOTAL VALUE LOCKED (TVL)</span>
-                  <span className="text-primary font-[500] text-[24px]">$ {commafy(totalStaked * 0.0019 )}</span>
+              <div className="rounded-[15px] border-2 border-highlight flex flex-col items-center justify-center px-[45px] py-[50px]">
+                <span className="text-highlight font-[700] text-[28px]">MAJIN STAKING</span>
+                <div className="flex flex-row justify-between items-center w-full mt-[30px]">
+                  <span className="text-primary font-[500] text-[18px]">TOTAL VALUE LOCKED (TVL)</span>
+                  <span className="text-primary font-[500] text-[18px]">$ {commafy(totalStaked * 0.0019 )}</span>
                 </div>
-                <div className="flex flex-row justify-between items-center w-full mt-[24px]">
-                  <span className="text-primary font-[500] text-[24px]">STAKED</span>
-                  <span className="text-primary font-[500] text-[24px]">{commafy(meStaked)} MAJIN</span>
+                <div className="flex flex-row justify-between items-center w-full mt-[18px]">
+                  <span className="text-primary font-[500] text-[18px]">STAKED</span>
+                  <span className="text-primary font-[500] text-[18px]">{commafy(meStaked)} MAJIN</span>
                 </div>
-                <div className="flex flex-row justify-between items-center w-full mt-[24px]">
-                  <span className="text-primary font-[500] text-[24px]">AVAILABLE</span>
-                  <span className="text-primary font-[500] text-[24px]">{commafy(tokenBalance)} MAJIN</span>
+                <div className="flex flex-row justify-between items-center w-full mt-[18px]">
+                  <span className="text-primary font-[500] text-[18px]">AVAILABLE</span>
+                  <span className="text-primary font-[500] text-[18px]">{commafy(tokenBalance)} MAJIN</span>
                 </div>
                 <div className="w-4/6 flex flex-col">
-                  <div className="w-full rounded-[20px] border-2 border-highlight flex items-center justify-end px-[20px] py-[18px] mt-[40px]">
+                  <div className="w-full rounded-[20px] border-2 border-highlight flex items-center justify-end px-[20px] py-[12px] mt-[40px]">
                     <input
-                        className="text-[24px] font-[500] bg-transparent outline-none flex-auto text-right pr-[10px] text-primary"
+                        className="text-[18px] font-[500] bg-transparent outline-none flex-auto text-right pr-[10px] text-primary"
                         size="10"
                         placeholder="0"
                         value={depositeAmount}
                         onChange={(e) => setDepositeAmount(e.target.value)}
                       ></input>
-                    <span className="text-primary font-[500] text-[24px]">MAJIN</span>
+                    <span className="text-primary font-[500] text-[18px]">MAJIN</span>
                   </div>
 
                   <PrimaryButton
-                    className="font-[700] text-[24px] mt-[24px]"
+                    className="font-[700] text-[18px] mt-[18px]"
                     label="STAKE & EARN MAJIN"
                     onClick={() => {
                       onStake();
                     }}
                   />
 
-                  <div className="flex flex-row justify-between items-center w-full mt-[32px]">
-                    <span className="text-primary font-[400] text-[16px]">YOUR REWARDS</span>
-                    <span className="text-primary font-[400] text-[16px]">{commafy(reward)} MAJIN</span>
+                  <div className="flex flex-row justify-between items-center w-full mt-[28px]">
+                    <span className="text-primary font-[400] text-[14px]">YOUR REWARDS</span>
+                    <span className="text-primary font-[400] text-[14px]">{commafy(reward)} MAJIN</span>
                   </div>
 
-                  <div className="flex flex-row justify-between items-center w-full mt-[32px]">
+                  <div className="flex flex-row justify-between items-center w-full mt-[24px]">
                     <PrimaryButton
-                      className="w-[45%] text-[16px] py-[8px]"
+                      className="w-[45%] text-[14px] py-[8px]"
                       label="UNSTAKE"
                       onClick={() => {
                         onUnstake();
                       }}
                     />
                     <PrimaryButton
-                      className="w-[45%] text-[16px] py-[8px]"
+                      className="w-[45%] text-[14px] py-[8px]"
                       label="CLAIM REWARDS"
                       onClick={() => {
                         onClaimRewards();
@@ -184,23 +184,23 @@ export default function Stake({ className }) {
               </div>
 
 
-              <div className="rounded-[20px] border-2 border-highlight flex flex-col items-center justify-center px-[45px] py-[70px] mt-[60px]">
-                <span className="text-highlight font-[700] text-[32px]">OVERALL METRICS</span>
+              <div className="rounded-[20px] border-2 border-highlight flex flex-col items-center justify-center px-[45px] py-[50px] mt-[40px]">
+                <span className="text-highlight font-[700] text-[28px]">OVERALL METRICS</span>
                 <div className="w-4/6 flex flex-col">
                   
-                  <div className="flex flex-row justify-between items-center w-full mt-[32px]">
-                    <span className="text-primary font-[400] text-[24px]">DAILY RETURN</span>
-                    <span className="text-primary font-[400] text-[24px]">{commafy(dailyReturn)}%</span>
+                  <div className="flex flex-row justify-between items-center w-full mt-[28px]">
+                    <span className="text-primary font-[400] text-[18px]">DAILY RETURN</span>
+                    <span className="text-primary font-[400] text-[18px]">{commafy(dailyReturn)}%</span>
                   </div>
 
-                  <div className="flex flex-row justify-between items-center w-full mt-[32px]">
-                    <span className="text-primary font-[400] text-[24px]">APR</span>
-                    <span className="text-primary font-[400] text-[24px]">{commafy(dailyReturn*365)}%</span>
+                  <div className="flex flex-row justify-between items-center w-full mt-[28px]">
+                    <span className="text-primary font-[400] text-[18px]">APR</span>
+                    <span className="text-primary font-[400] text-[18px]">{commafy(dailyReturn*365)}%</span>
                   </div>
 
-                  <div className="flex flex-row justify-between items-center w-full mt-[32px]">
-                    <span className="text-primary font-[400] text-[24px]">PROTOCOL FEE</span>
-                    <span className="text-primary font-[400] text-[24px]">1%</span>
+                  <div className="flex flex-row justify-between items-center w-full mt-[28px]">
+                    <span className="text-primary font-[400] text-[18px]">PROTOCOL FEE</span>
+                    <span className="text-primary font-[400] text-[18px]">1%</span>
                   </div>
                   
                 </div>

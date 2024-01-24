@@ -42,8 +42,8 @@ function App() {
         <div className="w-full relative">
           <header className="flex flex-row justify-between items-center w-full">
             <div className="flex">
-              <img src="/logo.png" className="w-[88px] h-[100px]" alt=""/>
-              <span className="text-highlight font-black text-left text-[36px] ml-2">MAJIN<br/>STAKING</span>
+              <img src="/logo.png" className="w-[64px] h-[70px]" alt=""/>
+              <span className="text-highlight font-black text-left text-[24px] ml-2">MAJIN<br/>STAKING</span>
             </div>
             <div className="flex flex-row items-center ">
               <SocialIcon social={SOCIAL_TWITTER}/>
@@ -51,7 +51,7 @@ function App() {
               <WalletConnectButton className="ml-[22px]" />
             </div>
           </header>
-          <div className="w-full py-[80px]">
+          <div className="w-full py-[30px]">
             <Stake />
           </div>
         </div>
